@@ -4,6 +4,9 @@ from time import sleep
 from win32api import mouse_event, SetCursorPos, GetSystemMetrics
 from win32con import MOUSEEVENTF_LEFTDOWN, MOUSEEVENTF_LEFTUP
 
+import gc
+gc.disable()
+
 
 class CameraLockMacro(object):
     def __init__(self) -> None:
@@ -12,8 +15,7 @@ class CameraLockMacro(object):
         #self.favorite_key = keyboard.Key.f1
         self.favorite_key = "b"
         self.executing = False
-        self.sleep_a = 0.126
-        self.sleep_b = 0.24
+        self.sleep = 0.08
 
         with Listener(on_press=self.on_press) as listener:
             listener.join()
@@ -21,7 +23,7 @@ class CameraLockMacro(object):
     
     def left_click(self) -> None:
         mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-        sleep(self.sleep_a)
+        sleep(self.sleep)
         mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
     
     
@@ -29,17 +31,22 @@ class CameraLockMacro(object):
         self.executing = True
         while self.executing:
             SetCursorPos((self.x, self.y))
+            sleep(0.00277777778)
             
     
     def on_press(self, key) -> None:
         try:
             if key.char == self.favorite_key:
-                Thread(target=self.move_mouse).start()
-                sleep(self.sleep_a)
+                process = Thread(target=self.move_mouse)
+                process.daemon = True
+                process.start()
+                sleep(self.sleep)
                 self.left_click()
-                sleep(self.sleep_b)
+                sleep(self.sleep)
                 self.left_click()
                 self.executing = False
+                sleep(self.sleep)
+                gc.collect()
                 
         except AttributeError:
             pass        

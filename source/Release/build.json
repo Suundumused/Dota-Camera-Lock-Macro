@@ -7,7 +7,7 @@
   },
   {
    "optionDest": "filenames",
-   "value": "E:/PyProjs/Dota_Camera_AutoLock/__init__.py"
+   "value": "E:/PyProjs/Dota_Camera_AutoLock/source/__init__.py"
   },
   {
    "optionDest": "onefile",
@@ -19,7 +19,7 @@
   },
   {
    "optionDest": "name",
-   "value": "Dota 2 - Camera auto lock"
+   "value": "Dota 2 - Camera AutoLock"
   },
   {
    "optionDest": "clean_build",
