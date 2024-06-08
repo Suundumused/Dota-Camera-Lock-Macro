@@ -19,19 +19,19 @@ class CameraLockMacro(object):
             listener.join()
     
     
-    def left_click(self):
+    def left_click(self) -> None:
         mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
         sleep(self.sleep_a)
         mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
     
     
-    def move_mouse(self):
+    def move_mouse(self) -> None:
         self.executing = True
         while self.executing:
             SetCursorPos((self.x, self.y))
             
     
-    def on_press(self, key):
+    def on_press(self, key) -> None:
         try:
             if key.char == self.favorite_key:
                 Thread(target=self.move_mouse).start()
