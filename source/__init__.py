@@ -10,8 +10,11 @@ gc.disable()
 
 class CameraLockMacro(object):
     def __init__(self) -> None:
-        self.x = int(0.32 * GetSystemMetrics(0))
-        self.y = int(0.93 * GetSystemMetrics(1))
+        self.win_size = (GetSystemMetrics(0), GetSystemMetrics(1))
+        self.x = int(0.32 * self.win_size[0])
+        self.y = int(0.93 * self.win_size[1])
+        self.middle_x = int(0.5 * self.win_size[0])
+        self.middle_y = int(0.5 * self.win_size[1])
         #self.favorite_key = keyboard.Key.f1
         self.favorite_key = "b"
         self.executing = False
@@ -41,12 +44,16 @@ class CameraLockMacro(object):
                 process = Thread(target=self.move_mouse)
                 process.daemon = True
                 process.start()
+                
                 sleep(self.sleep)
                 self.left_click()
                 sleep(self.sleep)
                 self.left_click()
+                
                 self.executing = False
                 sleep(self.sleep)
+                
+                SetCursorPos((self.middle_x, self.middle_y))
                 gc.collect()
                 
         except AttributeError:
