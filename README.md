@@ -36,7 +36,6 @@ This Python script provides a convenient solution for automatically locking the 
 
 - This script is specifically designed to work on Windows operating systems.
 - The default key to trigger the camera lock is "b", but you can customize it by modifying the `favorite_key` variable in the script.
-- Adjustments to the `sleep_a` and `sleep_b` variables may be necessary depending on the application or game you are using the macro with.
 
 ### Disclaimer
 

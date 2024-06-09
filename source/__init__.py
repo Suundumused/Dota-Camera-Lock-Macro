@@ -15,7 +15,8 @@ class CameraLockMacro(object):
         #self.favorite_key = keyboard.Key.f1
         self.favorite_key = "b"
         self.executing = False
-        self.sleep = 0.08
+        self.sleep = 0.0625 #ms
+        self.rate = 0.00138888889 #720Hz
 
         with Listener(on_press=self.on_press) as listener:
             listener.join()
@@ -31,7 +32,7 @@ class CameraLockMacro(object):
         self.executing = True
         while self.executing:
             SetCursorPos((self.x, self.y))
-            sleep(0.00277777778)
+            sleep(self.rate)
             
     
     def on_press(self, key) -> None:
